@@ -1,0 +1,6 @@
+python-logstash
+flask
+redis
+requests
+uuid
+pyyaml

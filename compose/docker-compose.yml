@@ -3,6 +3,7 @@ version: "3.4"
 services:
   # this is our kafka cluster.
   kafka-cluster:  # the kafka-manager must be part of this service as topics can only be created from cli
+    image: 127.0.0.1:5001/jupyter
     build: kafka_stack/
     environment:
       ADV_HOST: 127.0.0.1         # Change to 192.168.99.100 if using Docker Toolbox
@@ -20,7 +21,7 @@ services:
       - datachannel
 
   gost-db:
-    image: geodan/gost-db
+    image: geodan/gost-db:0.5
     restart: always
     volumes:
         - il08X_postgis:/var/lib/postgresql/data

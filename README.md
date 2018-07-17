@@ -20,6 +20,7 @@ The DataChannel Service is composed from the following components:
 
 1. [Requirements](#requirements)
 2. [Usage](#usage)
+3. [Backlog](Backlog)
 3. [Trouble-Shooting](#Trouble-shooting)
 
 
@@ -201,7 +202,16 @@ http://hostname:8082/consumers/my-consumer-group/instances/my_consumer_json/reco
 ```
 
 
+## Backlog
+
+
+
 ## Trouble-Shooting
 
 * ERROR org.apache.kafka.common.errors.TopicExistsException: Topic 'eu.channelID_10.companyID_Salzburg-Research' already exists.
 If data is sent before kafka topics are restored, an error will be returned.
+
+* ERROR in all gost applications: "invalid data found"
+There could be a version jump between postgresql 9 and 10, which leads to
+invalid data representation. Remove all images involving GOST
+

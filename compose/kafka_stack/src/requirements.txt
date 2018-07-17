@@ -1,6 +1,6 @@
-python-logstash
 flask
 redis
 requests
-uuid
+#uuid
 pyyaml
+#python-logstash

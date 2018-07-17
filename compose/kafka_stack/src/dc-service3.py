@@ -42,7 +42,6 @@ ST_SERVER = "http://gost:8080/v1.0/"  # GOST server is reachable within kafka st
 
 if os.uname()[1] == 'iot86':
     in_dev_mode = True
-    print("running in development mode")
 else:
     in_dev_mode = False
 

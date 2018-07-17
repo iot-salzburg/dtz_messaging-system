@@ -20,6 +20,16 @@ services:
     networks:
       - datachannel
 
+  redis:
+    image: redis:alpine
+    networks:
+      - datachannel
+    stop_grace_period: 1m30s
+    deploy:
+      placement:
+        constraints:
+          - node.lables.node == 81
+
   gost-db:
     image: geodan/gost-db:0.5
     restart: always

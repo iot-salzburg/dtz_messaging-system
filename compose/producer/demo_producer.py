@@ -1,59 +1,37 @@
-import os
-import sys
 import time
-import json
-import logging
-from multiprocessing import Process
-import requests
-from flask import Flask, jsonify
-from redis import Redis
-from logstash import TCPLogstashHandler
-# confluent_kafka is based on librdkafka, details in requirements.txt
-
-from confluent_kafka import Consumer, Producer, KafkaError
+import numpy as np
+from confluent_kafka import Producer
 from confluent_kafka import avro
 from confluent_kafka.avro import AvroProducer
 
-BOOTSTRAP_SERVERS = 'il061,il062,il063'
-SCHEMA_REGISTRY_HOST = 'http://127.0.0.1:8082'
+#BOOTSTRAP_SERVERS = 'il081:9092,il082:9092,il083:9092'
+BOOTSTRAP_SERVERS = 'localhost:9092'
+# SCHEMA_REGISTRY_HOST = 'http://127.0.0.1:8082'
 
-value_schema_str = """
-{
-   "namespace": "my.test",
-   "name": "value",
-   "type": "record",
-   "fields" : [
-     {
-       "name" : "name",
-       "type" : "string"
-     }
-   ]
-}
-"""
 
-key_schema_str = """
-{
-   "namespace": "my.test",
-   "name": "key",
-   "type": "record",
-   "fields" : [
-     {
-       "name" : "name",
-       "type" : "string"
-     }
-   ]
-}
-"""
+producer = Producer({'bootstrap.servers': BOOTSTRAP_SERVERS})
+print("Successfully connected to the broker: {}".format(BOOTSTRAP_SERVERS))
 
-value_schema = avro.loads(value_schema_str)
-key_schema = avro.loads(key_schema_str)
-value = {"name": "Value"}
-key = {"name": "Key"}
+def delivery_report(err, msg):
+    """ Called once for each message produced to indicate delivery result.
+        Triggered by poll() or flush(). """
+    if err is not None:
+        print('Message delivery failed: {}'.format(err))
+    else:
+        print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
-avroProducer = AvroProducer({
-    'bootstrap.servers': BOOTSTRAP_SERVERS,
-    'schema.registry.url': SCHEMA_REGISTRY_HOST
-    }, default_key_schema=key_schema, default_value_schema=value_schema)
+while True:
+    # Trigger any available delivery report callbacks from previous produce() calls
+    producer.poll(0)
 
-avroProducer.produce(topic='test-avro', value=value, key=key)
-avroProducer.flush()
+    # Asynchronously produce a message, the delivery report callback
+    # will be triggered from poll() above, or flush() below, when the message has
+    # been successfully delivered or failed permanently.
+    randint = str(np.random.randn())
+    print(randint)
+    producer.produce('mytopic', key='', value=randint.encode('utf-8'), callback=delivery_report)
+    time.sleep(10)
+
+# Wait for any outstanding messages to be delivered and delivery report
+# callbacks to be triggered.
+p.flush()

@@ -4,8 +4,8 @@ from confluent_kafka import Producer
 from confluent_kafka import avro
 from confluent_kafka.avro import AvroProducer
 
-#BOOTSTRAP_SERVERS = 'il081:9092,il082:9092,il083:9092'
-BOOTSTRAP_SERVERS = 'localhost:9092'
+BOOTSTRAP_SERVERS = 'il081:9093,il082:9094,il083:9095'
+#BOOTSTRAP_SERVERS = 'localhost:9092'
 # SCHEMA_REGISTRY_HOST = 'http://127.0.0.1:8082'
 
 
@@ -29,7 +29,7 @@ while True:
     # been successfully delivered or failed permanently.
     randint = str(np.random.randn())
     print(randint)
-    producer.produce('mytopic', key='', value=randint.encode('utf-8'), callback=delivery_report)
+    producer.produce('test', key='', value=randint.encode('utf-8'), callback=delivery_report)
     time.sleep(10)
 
 # Wait for any outstanding messages to be delivered and delivery report

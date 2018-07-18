@@ -10,10 +10,9 @@ from datetime import datetime
 import requests
 from flask import Flask, jsonify, request
 from redis import Redis
-from logstash import TCPLogstashHandler
 
-__date__ = "20 April 2018"
-__version__ = "1.2"
+__date__ = "17 Juli 2018"
+__version__ = "1.3"
 __email__ = "christoph.schranz@salzburgresearch.at"
 __status__ = "Development"
 __desc__ = """The datachannel services manages kafka topics on the broker, clones the datachannel contract onto the provided 
@@ -30,19 +29,17 @@ functionality of SensorThings and provides API."""
 
 # Kafka parameters
 STATUS_FILE = "status.log"
-ZOOKEEPER_HOST = "localhost:2181"
+ZOOKEEPER_HOST = "localhost:2181"  # even in a docker-compose
 NUMBER_OF_REPLICAS = 1
 NUMBER_OF_PARTITIONS = 1
 RETENTION_TIME = 6  # in months
 
 # Sensorthings parameters
-# ST_SERVER = "http://localhost:8084/v1.0/"  # reachable only from host outside docker
 ST_SERVER = "http://gost:8080/v1.0/"  # GOST server is reachable within kafka stack with that
 # REFRESH_MAPPING_EVERY = 5 * 60  # in seconds
 
 if os.uname()[1] == 'iot86':
     in_dev_mode = True
-    print("running in development mode")
 else:
     in_dev_mode = False
 
@@ -126,6 +123,13 @@ def reassemble_kafka_from_st():
         f.write(json.dumps(adapter_status))
 
 
+def create_kafka_topics():
+    main_topics = ["OM_Measurement", "OM_Observation", "Logging"]
+    for topic_name in main_topics:
+        create_topic(topic_name)
+    print("created main topics")
+
+
 def get_topic_name(payload):
     """
     Given a payload, this function creates an unique name that is valid for creating a kafka topic.
@@ -154,6 +158,7 @@ def create_topic(topic_name):
         response = pipe.read()
     else:
         response = cmd
+        print("Create: " + topic_name)
 
     if "\nCreated" in response:
         # Filter line of form: Created topic "eu.channelID_1.companyID_ownername".
@@ -224,7 +229,10 @@ def print_adapter_status():
 
 
 if __name__ == '__main__':
-    restore_from_sensorthings = Process(target=reassemble_kafka_from_st, args=())
-    restore_from_sensorthings.start()
+    time.sleep(20)  # Wait some time till the broker started
+    # restore_from_sensorthings = Process(target=reassemble_kafka_from_st, args=())
+    # restore_from_sensorthings.start()
+    create_kafka_topics_proc = Process(target=create_kafka_topics, args=())
+    create_kafka_topics_proc.start()
 
     app.run(host="0.0.0.0", debug=False, port=3033)

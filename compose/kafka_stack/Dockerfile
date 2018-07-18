@@ -1,4 +1,5 @@
 FROM landoop/fast-data-dev:cp4.0
+#FROM landoop/fast-data-dev:1.1
 MAINTAINER Christoph Schranz <christoph.schranz@salzburgresearch.at>
 
 # Install required tools

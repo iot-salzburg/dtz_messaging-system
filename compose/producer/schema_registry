@@ -1,0 +1,45 @@
+{
+  "type": "record",
+  "name": "SensorThingsData",
+  "namespace": "eu.srfg.iot.sensorthings",
+  "fields": [
+    {
+      "name": "Datastream",
+      "type": "int"
+    },
+    {
+      "name": "phenomenonTime",
+      "type": "string"
+    },
+    {
+      "name": "result",
+      "type": [
+        "null",
+        "float"
+      ]
+    },
+    {
+      "name": "message",
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  ]
+}
+
+{
+  "value_schema": "{\"type\": \"record\", \"name\": \"SensorThingsData\", \"namespace\": \"eu.srfg.iot.sensorthings\", \"fields\": [{\"name\": \"Datastream\", \"type\": \"int\"}, {\"name\" :\"phenomenonTime\",  \"type\": \"string\"},{\"name\":\"result\",\"type\":[\"null\",\"float\"]},{\"name\":\"message\",\"type\":[\"null\",\"string\"]}]}",
+  "records": [
+    {
+      "value": {"Datastream": 3, "phenomenonTime": "2018-07-20T07:24:50", "result": null, "message": null }
+    },
+		{
+      "value": {"Datastream": 2, "phenomenonTime": "2018-07-20T07:24:51", "result": {"float": 12.5 }, "message": null}
+    },
+		{
+      "value": {"Datastream": 2, "phenomenonTime": "2018-07-20T07:24:51", "result": {"float": 12.5 }, "message": {"string": "Hello Elasticsearch!"}}
+    }
+  ]
+}
+

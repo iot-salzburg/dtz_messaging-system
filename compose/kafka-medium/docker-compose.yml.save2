@@ -1,13 +1,12 @@
 version: '3'
 services:
   zookeeper:
-    image: 127.0.0.1:5001/kafka:latest
-    build: ./base-image
+    image: kafka:latest
     volumes:
       - zoo-stack-data:/tmp/zookeeper
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 2181:2181
+      - 2182:2181
     networks:
       - kafka-net
     deploy:
@@ -18,8 +17,7 @@ services:
     command: /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
 
   kafka1:
-    image: 127.0.0.1:5001/kafka:latest
-    build: ./base-image
+    image: kafka:latest
     volumes:
        - kafka-stack-1-logs:/tmp/kafka-logs
        - /var/run/docker.sock:/var/run/docker.sock
@@ -34,11 +32,8 @@ services:
           - node.labels.kafka==81
     command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9093 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://192.168.48.81:9093 --override broker.id=1
 
-
-
   kafka2:
-    image: 127.0.0.1:5001/kafka:latest
-    build: ./base-image
+    image: kafka:latest
     volumes:
        - kafka-stack-2-logs:/tmp/kafka-logs
        - /var/run/docker.sock:/var/run/docker.sock
@@ -54,8 +49,7 @@ services:
     command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9094 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://192.168.48.82:9094 --override broker.id=2
 
   kafka3:
-    image: 127.0.0.1:5001/kafka:latest
-    build: ./base-image
+    image: kafka:latest
     volumes:
        - kafka-stack-3-logs:/tmp/kafka-logs
        - /var/run/docker.sock:/var/run/docker.sock

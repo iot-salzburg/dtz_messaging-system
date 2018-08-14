@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  zookeeper:
+    image: 127.0.0.1:5001/kafka:latest
+    build: .
+    ports:
+      - 2181:2181
+    deploy:
+#      mode: global
+      placement:
+        constraints:
+          - node.labels.zoo==81
+    command: /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
+

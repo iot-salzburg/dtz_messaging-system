@@ -1,0 +1,75 @@
+version: '3'
+services:
+  zookeeper:
+    image: 127.0.0.1:5001/kafka:latest
+    volumes:
+      - zoo-stack-data:/tmp/zookeeper
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 2181:2181
+    networks:
+      - kafka-net
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.zoo==81
+    command: /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
+
+  kafka1:
+    image: 127.0.0.1:5001/kafka:latest
+    volumes:
+       - kafka-stack-1-logs:/tmp/kafka-logs
+       - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+       - 9093:9093
+    networks:
+       - kafka-net
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.kafka==81
+    command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9093 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://il081:9093 --override broker.id=1
+
+  kafka2:
+    image: 127.0.0.1:5001/kafka:latest
+    volumes:
+       - kafka-stack-2-logs:/tmp/kafka-logs
+       - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+       - 9094:9094
+    networks:
+       - kafka-net
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.kafka==82
+    command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9094 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://il082:9094 --override broker.id=2
+
+  kafka3:
+    image: 127.0.0.1:5001/kafka:latest
+    volumes:
+       - kafka-stack-3-logs:/tmp/kafka-logs
+       - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+       - 9095:9095
+    networks:
+       - kafka-net
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.kafka==83
+    command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9095 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://il083:9095 --override broker.id=3
+
+networks:
+  kafka-net:
+
+volumes:
+  kafka-stack-1-logs:
+  kafka-stack-2-logs:
+  kafka-stack-3-logs:
+  zoo-stack-data:
+

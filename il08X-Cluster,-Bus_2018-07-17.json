@@ -1,0 +1,1563 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-07-17T13:49:27.903Z",
+	"__export_source": "insomnia.desktop.app:v5.16.2",
+	"resources": [
+		{
+			"_id": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"created": 1522936908876,
+			"description": "Sample of REST Proxy calls ",
+			"modified": 1522936908876,
+			"name": "il08X Cluster, Bus",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_7426e430719640fa9b1413b9a51171d8",
+			"color": null,
+			"created": 1522936908886,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1522936908886,
+			"name": "Base Environment",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_367164aaacb74b89b03f61d673f1c000",
+			"cookies": [],
+			"created": 1522936908907,
+			"modified": 1522936908907,
+			"name": "Default Jar",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_21692e08a5ec4469881ebd3dac8a22e4",
+			"created": 1522936908950,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1511859940194,
+			"modified": 1522936908950,
+			"name": "Producers",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_50d04aca07454fceb8c04008e1e9d199",
+			"created": 1522936908961,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1511859940244,
+			"modified": 1522936908961,
+			"name": "Consumers",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"created": 1522936908995,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1522932043646,
+			"modified": 1522936908995,
+			"name": "dataChannel",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_b2e30cac0067428f880cc93ca399988f",
+			"created": 1524144318908,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1517395991945,
+			"modified": 1524144332042,
+			"name": "GOST",
+			"parentId": "wrk_ca2fdc7cdd8c4c8dae99513f3b622d8b",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_b7d72b97fd6b43cab9c6699de60f8f95",
+			"color": null,
+			"created": 1522936908892,
+			"data": {
+				"hostname": "127.0.0.1"
+			},
+			"isPrivate": false,
+			"modified": 1522936908892,
+			"name": "Localhost",
+			"parentId": "env_7426e430719640fa9b1413b9a51171d8",
+			"_type": "environment"
+		},
+		{
+			"_id": "env_694cdd702e9d44cf9b0ae2b2fb7195b9",
+			"color": null,
+			"created": 1522936908901,
+			"data": {
+				"hostname": "192.168.99.100"
+			},
+			"isPrivate": false,
+			"modified": 1522936908901,
+			"name": "Docker Toolbox",
+			"parentId": "env_7426e430719640fa9b1413b9a51171d8",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_c06d83e5e6914b7e8a369c8a344124d3",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"records\": [\n    {\n      \"key\": \"a2V5\",\n      \"value\": \"aGVsbG8gd29ybGQhISE=\"\n    },\n    {\n      \"value\": \"XCJyYW5kb206JSQh\",\n      \"partition\": 0\n    },\n    {\n      \"value\": \"bm8gcGFydGl0aW9ucw==\"\n    }\n  ]\n}"
+			},
+			"created": 1522936908952,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ceb55814dbfb4f0987b66d4cca7b19fa",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.binary.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860265983,
+			"method": "POST",
+			"modified": 1523011269783,
+			"name": "Produce Binary",
+			"parameters": [],
+			"parentId": "fld_21692e08a5ec4469881ebd3dac8a22e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/rest-binary",
+			"_type": "request"
+		},
+		{
+			"_id": "req_25b5d93480064d0bb6f377c095826a66",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"records\": [\n    {\n      \"key\": \"somekey\",\n      \"value\": {\"foo\": \"bar\"}\n    },\n    {\n      \"value\": [ \"foo\", \"bar\" ],\n      \"partition\": 0\n    },\n    {\n      \"value\": 53.5\n    }\n  ]\n}"
+			},
+			"created": 1522936908956,
+			"description": "",
+			"headers": [
+				{
+					"disabled": false,
+					"id": "pair_9c94d12905114a028a8af10fd15c8e85",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.json.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860106274.5,
+			"method": "POST",
+			"modified": 1523012608366,
+			"name": "Produce JSON",
+			"parameters": [],
+			"parentId": "fld_21692e08a5ec4469881ebd3dac8a22e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/rest-json",
+			"_type": "request"
+		},
+		{
+			"_id": "req_06796a74170a44d0884a8a7632faf0ad",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.json.v2+json",
+				"text": "{\n  \"value_schema\": \"{\\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"User\\\", \\\"fields\\\": [{\\\"name\\\": \\\"name\\\", \\\"type\\\": \\\"string\\\"}, {\\\"name\\\" :\\\"age\\\",  \\\"type\\\": [\\\"null\\\",\\\"int\\\"]}]}\",\n  \"records\": [\n    {\n      \"value\": {\"name\": \"testUser\", \"age\": null }\n    },\n    {\n      \"value\": {\"name\": \"testUser\", \"age\": {\"int\": 25} },\n      \"partition\": 0\n    }\n  ]\n}\n"
+			},
+			"created": 1522936908958,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9c94d12905114a028a8af10fd15c8e85",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.avro.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860026420.25,
+			"method": "POST",
+			"modified": 1522936908958,
+			"name": "Produce AVRO",
+			"parameters": [],
+			"parentId": "fld_21692e08a5ec4469881ebd3dac8a22e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/rest-avro",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a6431c1c37554646bcc3018bb8cb8d77",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.json.v2+json",
+				"text": "{\n  \"value_schema_id\": 21,\n  \"records\": [\n    {\n      \"value\": {\"name\": \"testUser4\", \"age\": null }\n    },\n    {\n      \"value\": {\"name\": \"testUser2\", \"age\": {\"int\": 34} },\n      \"partition\": 0\n    }\n  ]\n}\n"
+			},
+			"created": 1522936908959,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9c94d12905114a028a8af10fd15c8e85",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.avro.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860026370.25,
+			"method": "POST",
+			"modified": 1523013431686,
+			"name": "Produce AVRO schema_id",
+			"parameters": [],
+			"parentId": "fld_21692e08a5ec4469881ebd3dac8a22e4",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/rest-avro",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"created": 1522936908962,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1511860880642,
+			"modified": 1522936908962,
+			"name": "Binary",
+			"parentId": "fld_50d04aca07454fceb8c04008e1e9d199",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_b380064467974e2e843e5efca3a96d70",
+			"created": 1522936908970,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1511860527992.75,
+			"modified": 1522936908970,
+			"name": "JSON",
+			"parentId": "fld_50d04aca07454fceb8c04008e1e9d199",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"created": 1522936908984,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1511860175343.5,
+			"modified": 1522936908984,
+			"name": "AVRO",
+			"parentId": "fld_50d04aca07454fceb8c04008e1e9d199",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"created": 1522936908996,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1522932056164,
+			"modified": 1522936908996,
+			"name": "JSON Consumer",
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"created": 1522936909004,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1522932056114,
+			"modified": 1522936909004,
+			"name": "AVRO Consumer",
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_faff7b28c344484fba6878467dead5a0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"records\": [\n    {\n      \"key\": \"quantity1\",\n      \"value\": {\"iot.id\": 998,\n\t\t\t\t\t\t\t \"phenomenonTime\": \"{% now 'iso-8601', '' %}\",\n\t\t\t\t\t\t\t \"resultTime\": \"{% now 'iso-8601', '' %}\",\n\t\t\t\t\t\t\t \"result\": 1234.56}\n    }\n  ]\n}"
+			},
+			"created": 1522936909012,
+			"description": "",
+			"headers": [
+				{
+					"disabled": false,
+					"id": "pair_9c94d12905114a028a8af10fd15c8e85",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.json.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522932056214,
+			"method": "POST",
+			"modified": 1524142018640,
+			"name": "Produce JSON on topic",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/eu.srfg.ultimaker.temp122",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8916cea74a9b4e8e95e03d8d4724f4b8",
+			"authentication": {},
+			"body": {},
+			"created": 1522936909013,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1522932056314,
+			"method": "GET",
+			"modified": 1522936909013,
+			"name": "List Kafka-Manager Status",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:3033",
+			"_type": "request"
+		},
+		{
+			"_id": "req_83ba18fa62c54c59a0fd4b92db81a283",
+			"authentication": {},
+			"body": {},
+			"created": 1522936909015,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522932056289,
+			"method": "GET",
+			"modified": 1522936909015,
+			"name": "Get Topic List",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0cfc5fe1f52b4bbb8bf0f3f410662731",
+			"authentication": {},
+			"body": {},
+			"created": 1522936909016,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_07ac35398f9d4a46a3567e118f182446",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522932056276.5,
+			"method": "GET",
+			"modified": 1522940170888,
+			"name": "Get Topic Config",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/eu.srfg.ultimaker.temp122",
+			"_type": "request"
+		},
+		{
+			"_id": "req_18d6d4bbe982487ebfbfbb1796e56c4f",
+			"authentication": {},
+			"body": {},
+			"created": 1522941646624,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1522932056279.625,
+			"method": "GET",
+			"modified": 1523014087814,
+			"name": "Create Avro Topic",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": " http://{{ hostname  }}:3033/create_avro/srfg/ultimaker/temp122",
+			"_type": "request"
+		},
+		{
+			"_id": "req_69534ee629084b44aefdcf32eccacf18",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.json.v2+json",
+				"text": "{\n  \"value_schema\": \"{\\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"User\\\", \\\"fields\\\": [{\\\"name\\\": \\\"name\\\", \\\"type\\\": \\\"string\\\"}, {\\\"name\\\" :\\\"age\\\",  \\\"type\\\": [\\\"null\\\",\\\"int\\\"]}]}\",\n  \"records\": [\n    {\n      \"value\": {\"name\": \"testUser\", \"age\": null }\n    },\n    {\n      \"value\": {\"name\": \"testUser\", \"age\": {\"int\": 25} },\n      \"partition\": 0\n    }\n  ]\n}\n"
+			},
+			"created": 1523014040439,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9c94d12905114a028a8af10fd15c8e85",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.avro.v2+json"
+				},
+				{
+					"id": "pair_dfcc31c0b8b24f2e9e2cb54e49c403b8",
+					"name": "Accept",
+					"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522932056195.25,
+			"method": "POST",
+			"modified": 1523014105780,
+			"name": "Produce AVRO",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/topics/eu.srfg.ultimaker.temp123",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1e3e3bd21ccf49819a39457ce45ecfa0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"sensor\":\n\t{\"name\": \"temp123\",\n\t \"system\": \"IoTLab.Ultimaker2\",\n\t \"company\": \"SalzburgResearch\",\n\t \"result\": 0.0\n\t}\n}"
+			},
+			"created": 1524131573957,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_c00d2b0e3a3f4a9fa57791bb9a9de152",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1522932056281.1875,
+			"method": "POST",
+			"modified": 1524132788879,
+			"name": "Create Topic",
+			"parameters": [],
+			"parentId": "fld_32fd1f4981a74a208d13d11aaf7b4855",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": " http://{{ hostname  }}:3033/create_sensor",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f146adcb372a4f8fac4f6987c60180f2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"name\": \"Temperature Monitoring System\",\n  \"description\": \"Sensor system monitoring area temperature\",\n  \"properties\": {\n    \"Deployment Condition\": \"Deployed in a third floor balcony\",\n    \"Case Used\": \"Radiation shield\"\n  },\n  \"Locations\": [{\n    \"name\": \"UofC CCIT\",\n    \"description\": \"University of Calgary, CCIT building\",\n    \"encodingType\": \"application/vnd.geo+json\",\n    \"location\": {\n      \"type\": \"Point\",\n      \"coordinates\": [-114.133, 51.08]\n    }\n  }]\n}"
+			},
+			"created": 1524144534032,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_da3e695a8a92491e89ba9277653424f1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1524144534132,
+			"method": "POST",
+			"modified": 1524147150121,
+			"name": "POST Thing",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4468e2172d4b4eb3b7d427b785a62ec5",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"contract clause\":\n\t{\n\t\t\"time range\":\n\t\t{\n\t\t\t\"from\": \"2018-04-19T13:11:12+00:00\",\n\t\t\t\"to\": \"2018-06-09T13:11:12+00:00\"\n\t\t},\n\t\t\n\t\t\"can monitor\":\n\t\t{\n\t\t\t\"user\":\n\t\t\t{\n\t\t\t\t\"personID\": \"personID\",\n\t\t\t\t\"companyID\": \"compancyID\"\n\t\t\t},\n\t\t\t\"consumig company\": \"consuming companyID\",\n\t\t\t\"machine\": \"machineID\",\n\t\t\t\"sensors\": [\"sensorID1\", \"sensorID2\", \"sensorID3\"],\n\t\t\t\"when\": [\n\t\t\t\t{\"machined_part\": \"orderID\"}\n\t\t\t]\n\t\t}\t\t\n\t}\n\n}"
+			},
+			"created": 1524144653101,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_269fd43ddbe44ce4a8d503bba359ae7b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1524144534082,
+			"method": "POST",
+			"modified": 1524147551985,
+			"name": "Submit Contract",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3c6e86947ecd4a24ac25f936608823cd",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"name\": \"Temperature Monitoring System\",\n  \"description\": \"Sensor system monitoring area temperature\",\n  \"properties\": {\n    \"Deployment Condition\": \"Deployed in a third floor balcony\",\n    \"Case Used\": \"Radiation shield\"\n  },\n  \"Locations\": [{\n    \"name\": \"UofC CCIT\",\n    \"description\": \"University of Calgary, CCIT building\",\n    \"encodingType\": \"application/vnd.geo+json\",\n    \"location\": {\n      \"type\": \"Point\",\n      \"coordinates\": [-114.133, 51.08]\n    }\n  }],\n  \"Datastreams\": [{\n    \"name\": \"Air Temperature DS\",\n    \"description\": \"Datastream for recording temperature\",\n    \"observationType\": \"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement\",\n    \"unitOfMeasurement\": {\n      \"name\": \"Degree Celsius\",\n      \"symbol\": \"degC\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius\"\n    },\n    \"ObservedProperty\": {\n      \"name\": \"Area Temperature\",\n      \"description\": \"The degree or intensity of heat present in the area\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AreaTemperature\"\n    },\n    \"Sensor\": {\n      \"name\": \"DHT22\",\n      \"description\": \"DHT22 temperature sensor\",\n      \"encodingType\": \"application/pdf\",\n      \"metadata\": \"https://cdn-shop.adafruit.com/datasheets/DHT22.pdf\"\n    }\n  }]\n}"
+			},
+			"created": 1524146744263,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_da3e695a8a92491e89ba9277653424f1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1524144534107,
+			"method": "POST",
+			"modified": 1524147887883,
+			"name": "POST Thing with datastreams",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things",
+			"_type": "request"
+		},
+		{
+			"_id": "req_82f20e2ed8b04af2afe03caf81e285a9",
+			"authentication": {},
+			"body": {},
+			"created": 1524147828759,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524147828759,
+			"method": "GET",
+			"modified": 1524147838832,
+			"name": "GET Things",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things",
+			"_type": "request"
+		},
+		{
+			"_id": "req_80c0aea6f07646829d02873c909de2a5",
+			"authentication": {},
+			"body": {},
+			"created": 1524148094934,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524146181445.5,
+			"method": "GET",
+			"modified": 1524148179728,
+			"name": "GET Thing with ID",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things(3)",
+			"_type": "request"
+		},
+		{
+			"_id": "req_cb21468b3c6645139928e3ed0926f312",
+			"authentication": {},
+			"body": {},
+			"created": 1524148184665,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524145357788.75,
+			"method": "GET",
+			"modified": 1524148219114,
+			"name": "GET datastreams from ThingID",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things(4)/Datastreams",
+			"_type": "request"
+		},
+		{
+			"_id": "req_959ee380f44e438bafd9e9c824d8386b",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"name\": \"Ultimaker 2, number7\",\n  \"description\": \"A 3D printing system in the 3D printing farm.\",\n  \"properties\": {\n\t\t\"from\": \"2018-04-19T13:11:12+00:00\",\n\t\t\"to\": \"2018-06-09T13:11:12+00:00\",\n    \"monitoring_clauses\": {\n\t\t\t\"machined part\": \"partID\",\n\t\t\t\"machined order\": \"orderID\"\n\t\t}\n  },\n  \"Locations\": [{\n    \"name\": \"IoT Lab\",\n    \"description\": \"Salzburg Research\",\n    \"encodingType\": \"application/vnd.geo+json\",\n    \"location\": {\n      \"type\": \"Point\",\n      \"coordinates\": [13.040631, 47.822782]\n    }\n  }],\n  \"Datastreams\": [{\n    \"name\": \"Air Temperature DS\",\n    \"description\": \"Datastream for recording temperature\",\n    \"observationType\": \"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement\",\n    \"unitOfMeasurement\": {\n      \"name\": \"Degree Celsius\",\n      \"symbol\": \"degC\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius\"\n    },\n    \"ObservedProperty\": {\n      \"name\": \"Area Temperature\",\n      \"description\": \"The degree or intensity of heat present in the area\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AreaTemperature\"\n    },\n    \"Sensor\": {\n      \"name\": \"DHT22\",\n      \"description\": \"DHT22 temperature sensor\",\n      \"encodingType\": \"application/pdf\",\n      \"metadata\": \"https://cdn-shop.adafruit.com/datasheets/DHT22.pdf\"\n    }\n  },\n\t\t\t\t\t\t\t\t {\n    \"name\": \"Nozzle Temperature DS\",\n    \"description\": \"Datastream for recording temperature of the printe's nozzle\",\n    \"observationType\": \"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement\",\n    \"unitOfMeasurement\": {\n      \"name\": \"Degree Celsius\",\n      \"symbol\": \"degC\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius\"\n    },\n    \"ObservedProperty\": {\n      \"name\": \"Nozzle Temperature\",\n      \"description\": \"The degree or intensity of heat of the printer's nozzle\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AreaTemperature\"\n    },\n    \"Sensor\": {\n      \"name\": \"PT100\",\n      \"description\": \"PT100 temperature sensor\",\n      \"encodingType\": \"application/pdf\",\n      \"metadata\": \"http://irtfweb.ifa.hawaii.edu/~iqup/domeenv/PDF/pt100plat.pdf\"\n    }\n  }]\n}"
+			},
+			"created": 1524148338963,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_269fd43ddbe44ce4a8d503bba359ae7b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1523538295198,
+			"method": "POST",
+			"modified": 1524152356369,
+			"name": "Submit Contract full",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c209aff23f264807be924abefd9de352",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n  \"name\": \"Ultimaker 2, number7\",\n  \"description\": \"A 3D printing system in the 3D printing farm.\",\n  \"properties\": {\n\t\t\"owner\": \"ownername\",\n\t\t\"from\": \"2018-04-19T13:11:12+00:00\",\n\t\t\"to\": \"2018-06-09T13:11:12+00:00\",\n    \"monitoring_clauses\": {\n\t\t\t\"machined part\": \"partID\",\n\t\t\t\"machined order\": \"orderID\"\n\t\t}\n  },\n  \"Locations\": [{\n    \"name\": \"IoT Lab\",\n    \"description\": \"Salzburg Research\",\n    \"encodingType\": \"application/vnd.geo+json\",\n    \"location\": {\n      \"type\": \"Point\",\n      \"coordinates\": [13.040631, 47.822782]\n    }\n  }],\n  \"Datastreams\": [{\n    \"name\": \"Air Temperature DS\",\n    \"description\": \"Datastream for recording temperature\",\n    \"observationType\": \"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement\",\n    \"unitOfMeasurement\": {\n      \"name\": \"Degree Celsius\",\n      \"symbol\": \"degC\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius\"\n    },\n    \"ObservedProperty\": {\n      \"name\": \"Area Temperature\",\n      \"description\": \"The degree or intensity of heat present in the area\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AreaTemperature\"\n    },\n    \"Sensor\": {\n      \"name\": \"DHT22\",\n      \"description\": \"DHT22 temperature sensor\",\n      \"encodingType\": \"application/pdf\",\n      \"metadata\": \"https://cdn-shop.adafruit.com/datasheets/DHT22.pdf\"\n    }\n  },\n\t\t\t\t\t\t\t\t {\n    \"name\": \"Nozzle Temperature DS\",\n    \"description\": \"Datastream for recording temperature of the printe's nozzle\",\n    \"observationType\": \"http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement\",\n    \"unitOfMeasurement\": {\n      \"name\": \"Degree Celsius\",\n      \"symbol\": \"degC\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#DegreeCelsius\"\n    },\n    \"ObservedProperty\": {\n      \"name\": \"Nozzle Temperature\",\n      \"description\": \"The degree or intensity of heat of the printer's nozzle\",\n      \"definition\": \"http://www.qudt.org/qudt/owl/1.0.0/quantity/Instances.html#AreaTemperature\"\n    },\n    \"Sensor\": {\n      \"name\": \"PT100\",\n      \"description\": \"PT100 temperature sensor\",\n      \"encodingType\": \"application/pdf\",\n      \"metadata\": \"http://irtfweb.ifa.hawaii.edu/~iqup/domeenv/PDF/pt100plat.pdf\"\n    }\n  }]\n}"
+			},
+			"created": 1524150701564,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_269fd43ddbe44ce4a8d503bba359ae7b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1523235175756,
+			"method": "POST",
+			"modified": 1524153957503,
+			"name": "Submit Contract full to DC service",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:3033/submit_contract",
+			"_type": "request"
+		},
+		{
+			"_id": "req_576b2e72aae24c6fa0a262d4bac78217",
+			"authentication": {},
+			"body": {},
+			"created": 1524210161837,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524145769617.125,
+			"method": "GET",
+			"modified": 1524216937477,
+			"name": "GET Thing from ID expanded",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things(1)?$expand=Locations,Sensor,Datastreams,Observations,ObservedProperty",
+			"_type": "request"
+		},
+		{
+			"_id": "req_45bb8bbc5c544ed4a58685a93afa00bc",
+			"authentication": {},
+			"body": {},
+			"created": 1524210256811,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524145563702.9375,
+			"method": "GET",
+			"modified": 1524210289365,
+			"name": "GET Datastreams from ID",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things(2)/Datastreams",
+			"_type": "request"
+		},
+		{
+			"_id": "req_67fbd63a295a4410aa9f308b37741100",
+			"authentication": {},
+			"body": {},
+			"created": 1524210258542,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524145460745.8438,
+			"method": "GET",
+			"modified": 1524210258542,
+			"name": "GET Locations from ID (Copy) (Copy)",
+			"parameters": [],
+			"parentId": "fld_b2e30cac0067428f880cc93ca399988f",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8084/v1.0/Things(2)/Locations",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e5e36cfc31be48fd8d66b373573d9471",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"name\": \"my_consumer_binary\",\n  \"format\": \"binary\",\n  \"auto.offset.reset\": \"earliest\",\n  \"auto.commit.enable\": \"false\"\n}"
+			},
+			"created": 1522936908963,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893948,
+			"method": "POST",
+			"modified": 1522936908963,
+			"name": "Create Consumer Binary",
+			"parameters": [],
+			"parentId": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group",
+			"_type": "request"
+		},
+		{
+			"_id": "req_77bcbd7adff04c1da15ad02ddd380fe6",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": ""
+			},
+			"created": 1522936908965,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893916.75,
+			"method": "DELETE",
+			"modified": 1523011964180,
+			"name": "Delete Consumer Binary",
+			"parameters": [],
+			"parentId": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_binary",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a1c003ea1d2f496c8300d4d815f5263c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"topics\": [\n    \"rest-binary\"\n  ]\n}"
+			},
+			"created": 1522936908967,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893923,
+			"method": "POST",
+			"modified": 1522936908967,
+			"name": "Subscribe Consumer Binary",
+			"parameters": [],
+			"parentId": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_binary/subscription",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f9d89f4c26be41689991473630beaee4",
+			"authentication": {},
+			"body": {},
+			"created": 1522936908968,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_83b23ffa577d4fdd8dff760d398e4e63",
+					"name": "Accept",
+					"value": "application/vnd.kafka.binary.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893913.625,
+			"method": "GET",
+			"modified": 1523012288107,
+			"name": "Consume Binary",
+			"parameters": [],
+			"parentId": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_binary/records?timeout=1000&max_bytes=300000",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d5837e29830648769545c0c37e7d95df",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "\n{\n  \"offsets\": [\n    {\n      \"topic\": \"rest-binary\",\n      \"partition\": 0,\n      \"offset\": 2\n    }\n  ]\n}"
+			},
+			"created": 1522936908969,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860579948.3125,
+			"method": "POST",
+			"modified": 1522936908969,
+			"name": "Commit Offsets",
+			"parameters": [],
+			"parentId": "fld_faf0bf827ff2413b96e8ec244b188d1a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_binary/offsets",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b295445c7b1d44dba0cc41a95cfac0e5",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"name\": \"my_consumer_json\",\n  \"format\": \"json\",\n  \"auto.offset.reset\": \"earliest\",\n  \"auto.commit.enable\": \"false\"\n}"
+			},
+			"created": 1522936908978,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893948,
+			"method": "POST",
+			"modified": 1523013915680,
+			"name": "Create Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_b380064467974e2e843e5efca3a96d70",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0d24071dc00f4583b87144d25351b207",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": ""
+			},
+			"created": 1522936908980,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893916.75,
+			"method": "DELETE",
+			"modified": 1523013103041,
+			"name": "Delete Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_b380064467974e2e843e5efca3a96d70",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json2",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ca54ef7d19384fb78e6ccdcf11c8f2c7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"topics\": [\n    \"rest-json\"\n  ]\n}"
+			},
+			"created": 1522936908981,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893923,
+			"method": "POST",
+			"modified": 1523013091018,
+			"name": "Subscribe Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_b380064467974e2e843e5efca3a96d70",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/subscription",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b33f13f83693480baf50696981ff02da",
+			"authentication": {},
+			"body": {},
+			"created": 1522936908982,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_83b23ffa577d4fdd8dff760d398e4e63",
+					"name": "Accept",
+					"value": "application/vnd.kafka.json.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893913.625,
+			"method": "GET",
+			"modified": 1523013058494,
+			"name": "Consume JSON",
+			"parameters": [],
+			"parentId": "fld_b380064467974e2e843e5efca3a96d70",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/records?timeout=3000&max_bytes=300000",
+			"_type": "request"
+		},
+		{
+			"_id": "req_cc8bbc37452f4867b9cadfca9dd939f0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "\n{\n  \"offsets\": [\n    {\n      \"topic\": \"rest-json\",\n      \"partition\": 0,\n      \"offset\": 2\n    }\n  ]\n}"
+			},
+			"created": 1522936908983,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860579948.3125,
+			"method": "POST",
+			"modified": 1522936908983,
+			"name": "Commit Offsets",
+			"parameters": [],
+			"parentId": "fld_b380064467974e2e843e5efca3a96d70",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/offsets",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d191d0473629492ca230be032eca6359",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"name\": \"my_consumer_avro\",\n  \"format\": \"avro\",\n  \"auto.offset.reset\": \"earliest\",\n  \"auto.commit.enable\": \"false\"\n}"
+			},
+			"created": 1522936908986,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893948,
+			"method": "POST",
+			"modified": 1522936908986,
+			"name": "Create Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group",
+			"_type": "request"
+		},
+		{
+			"_id": "req_191fbcad0a1b43dea8e5c88b9bd6f0ec",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": ""
+			},
+			"created": 1522936908987,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893916.75,
+			"method": "DELETE",
+			"modified": 1522936908987,
+			"name": "Delete Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro",
+			"_type": "request"
+		},
+		{
+			"_id": "req_43a7c790b0d3472292a04dd82c40e814",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"topics\": [\n    \"rest-avro\"\n  ]\n}"
+			},
+			"created": 1522936908988,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893923,
+			"method": "POST",
+			"modified": 1522936908988,
+			"name": "Subscribe Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/subscription",
+			"_type": "request"
+		},
+		{
+			"_id": "req_43bd2a953e294a32938dfc3d57661c75",
+			"authentication": {},
+			"body": {},
+			"created": 1522936908989,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_83b23ffa577d4fdd8dff760d398e4e63",
+					"name": "Accept",
+					"value": "application/vnd.kafka.avro.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893913.625,
+			"method": "GET",
+			"modified": 1522936908989,
+			"name": "Consume AVRO",
+			"parameters": [],
+			"parentId": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/records?timeout=3000&max_bytes=300000",
+			"_type": "request"
+		},
+		{
+			"_id": "req_297283ac83c54ae7bace3577eafc270f",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "\n{\n  \"offsets\": [\n    {\n      \"topic\": \"rest-json\",\n      \"partition\": 0,\n      \"offset\": 4\n    }\n  ]\n}"
+			},
+			"created": 1522936908990,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860579948.3125,
+			"method": "POST",
+			"modified": 1523013788342,
+			"name": "Commit Offsets",
+			"parameters": [],
+			"parentId": "fld_c87d94eb4af64961b9f9009b92a346df",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/offsets",
+			"_type": "request"
+		},
+		{
+			"_id": "req_be15eb267e59486fa89367bf1541de89",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"name\": \"my_consumer_json\",\n  \"format\": \"json\",\n  \"auto.offset.reset\": \"earliest\",\n  \"auto.commit.enable\": \"false\"\n}"
+			},
+			"created": 1522936908997,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893948,
+			"method": "POST",
+			"modified": 1522936908997,
+			"name": "Create Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4201b770d233428194ff7c166d101981",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": ""
+			},
+			"created": 1522936908999,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893916.75,
+			"method": "DELETE",
+			"modified": 1523013140820,
+			"name": "Delete Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json",
+			"_type": "request"
+		},
+		{
+			"_id": "req_eca12c0efb4942e486e097be1f0c96a3",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"topics\": [\n    \"eu.srfg.ultimaker.temp122\"\n  ]\n}"
+			},
+			"created": 1522936909000,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893923,
+			"method": "POST",
+			"modified": 1522936909000,
+			"name": "Subscribe Consumer JSON",
+			"parameters": [],
+			"parentId": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/subscription",
+			"_type": "request"
+		},
+		{
+			"_id": "req_277824c2a5504fa08d691c50a3a143b6",
+			"authentication": {},
+			"body": {},
+			"created": 1522936909001,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_83b23ffa577d4fdd8dff760d398e4e63",
+					"name": "Accept",
+					"value": "application/vnd.kafka.json.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893919.875,
+			"method": "GET",
+			"modified": 1522940713411,
+			"name": "Consume JSON",
+			"parameters": [],
+			"parentId": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/records?timeout=1000&max_bytes=300000",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a0bd4352cbb449e89deca1957c7de078",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "\n{\n  \"offsets\": [\n    {\n      \"topic\": \"rest-json\",\n      \"partition\": 0,\n      \"offset\": 2\n    }\n  ]\n}"
+			},
+			"created": 1522936909002,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860579948.3125,
+			"method": "POST",
+			"modified": 1522936909002,
+			"name": "Commit Offsets",
+			"parameters": [],
+			"parentId": "fld_82c928f9215949fa9b69f152bab63fbe",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_json/offsets",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e3558b15f2c4432bbe7b4e6a2987fe3d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"name\": \"my_consumer_avro\",\n  \"format\": \"avro\",\n  \"auto.offset.reset\": \"earliest\",\n  \"auto.commit.enable\": \"false\"\n}"
+			},
+			"created": 1522936909005,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893948,
+			"method": "POST",
+			"modified": 1522936909005,
+			"name": "Create Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c262a33233474fa2a0f0d13aef0eed8d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": ""
+			},
+			"created": 1522936909006,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860854667.961,
+			"method": "DELETE",
+			"modified": 1522937007659,
+			"name": "Delete Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro",
+			"_type": "request"
+		},
+		{
+			"_id": "req_7c2ecabe193244e69f6bfc45f2fda3dd",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "{\n  \"topics\": [\n    \"test-avro\"\n  ]\n}"
+			},
+			"created": 1522936909007,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893923,
+			"method": "POST",
+			"modified": 1522939919312,
+			"name": "Subscribe Consumer AVRO",
+			"parameters": [],
+			"parentId": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/subscription",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0829539b0b0341f39c7600cbdecb4859",
+			"authentication": {},
+			"body": {},
+			"created": 1522936909009,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_83b23ffa577d4fdd8dff760d398e4e63",
+					"name": "Accept",
+					"value": "application/vnd.kafka.avro.v2+json"
+				},
+				{
+					"id": "pair_31aaed08dc594aad816118bae658e8d6",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.avro.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860893913.625,
+			"method": "GET",
+			"modified": 1522941842312,
+			"name": "Consume AVRO",
+			"parameters": [],
+			"parentId": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/records?timeout=1000&max_bytes=300000",
+			"_type": "request"
+		},
+		{
+			"_id": "req_549017e74cc14d9da478a5d2dce122f9",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/vnd.kafka.v2+json",
+				"text": "\n{\n  \"offsets\": [\n    {\n      \"topic\": \"rest-json\",\n      \"partition\": 0,\n      \"offset\": 2\n    }\n  ]\n}"
+			},
+			"created": 1522936909010,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dfe7bfb06df346aab7750e57fbdc47d5",
+					"name": "Content-Type",
+					"value": "application/vnd.kafka.v2+json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1511860815422.2969,
+			"method": "POST",
+			"modified": 1522937005455,
+			"name": "Commit Offsets",
+			"parameters": [],
+			"parentId": "fld_9c68b615d0b44f8091cb50d180d57dcc",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://{{ hostname  }}:8082/consumers/my-consumer-group/instances/my_consumer_avro/offsets",
+			"_type": "request"
+		}
+	]
+}

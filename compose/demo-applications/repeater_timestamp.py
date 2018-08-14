@@ -104,7 +104,7 @@ class KafkaStAdapter:
 
     def stream_kafka(self):
         """highest
-        This function configures a kafka consumer and a logstash logger instance.
+        This function configures a kafka demo-applications and a logstash logger instance.
         :return
         """
         # Init logstash logging
@@ -119,7 +119,7 @@ class KafkaStAdapter:
         logger_logs.addHandler(logstash_handler)
         logger_logs.info('Added Logstash Logger for Logs with loggername: {}'.format(loggername_logs))
 
-        # Init kafka consumer
+        # Init kafka demo-applications
         logging.basicConfig(level='WARNING')
         kafka_topics_str = os.getenv('KAFKA_TOPICS', KAFKA_TOPICS)
         kafka_topics = [topic.strip() for topic in kafka_topics_str.split(",") if len(topic) > 0]

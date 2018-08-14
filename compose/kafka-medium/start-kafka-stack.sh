@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker build -t kafka ./base-image
 docker-compose build
 docker-compose push || true

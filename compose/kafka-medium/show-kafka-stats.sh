@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Printing 'docker service ls | grep kafka':"
 docker service ls | grep kafka
 echo ""

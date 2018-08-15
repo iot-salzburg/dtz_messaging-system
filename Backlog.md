@@ -8,7 +8,7 @@ Therefore the installation is done manually
 
 ## kafka-medium:
 Finally works with changes (on same page as comment)
-See the tutorial: https://medium.com/@NegiPrateek/wtf-setting-up-kafka-cluster-using-docker-stack-5efc68841c23
+See the [tutorial](https://medium.com/@NegiPrateek/wtf-setting-up-kafka-cluster-using-docker-stack-5efc68841c23)
 
 sudo apt-get update
 sudo apt-get dist-upgrade

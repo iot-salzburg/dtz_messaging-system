@@ -6,6 +6,13 @@ fast-data-dev is just good for testing.
 Therefore the installation is done manually
 
 
+## Label the nodes
+docker node update --label-add zoo=81 il081
+docker node update --label-add kafka=81 il081
+docker node update --label-add kafka=82 il082
+docker node update --label-add kafka=83 il083
+
+
 ## kafka-medium:
 Finally works with changes (on same page as comment)
 See the [tutorial](https://medium.com/@NegiPrateek/wtf-setting-up-kafka-cluster-using-docker-stack-5efc68841c23)
@@ -14,9 +21,11 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 sudo apt-get install openjdk-8-jre wget -y
 wget https://archive.apache.org/dist/kafka/0.11.0.3/kafka_2.11-0.11.0.3.tgz
-sudo tar -xvzf kafka_2.11-0.11.0.3.tgz 
-sudo mkdir /kafka
-sudo mv kafka_2.11-0.11.0.3/* /kafka
+sudo tar -xvzf kafka_2.11-0.11.0.3.tgz
+sudo mv kafka_2.11-0.11.0.3 /kafka
+
+Start the swarm with:
+./start-kafka-stack.sh
 
 
 ## Test the cluster with bash in the container
@@ -24,6 +33,7 @@ sudo mv kafka_2.11-0.11.0.3/* /kafka
 docker container ls
 docker exec -it uid bash
 
+### Test the system
 /kafka/bin/kafka-topics.sh --zookeeper zookeeper:2181 --list
 /kafka/bin/kafka-topics.sh --zookeeper zookeeper:2181 --create --topic test-topic --replication-factor 2 --partitions 3
 
@@ -31,6 +41,13 @@ docker exec -it uid bash
 /kafka/bin/kafka-console-producer.sh --broker-list kafka1:9092,kafka2:9092,kafka3:9092 --topic test-topic
 
 
+### Create desired topics
+/kafka/bin/kafka-topics.sh --zookeeper zookeeper:2181 --create --topic dtz-sensorthings --replication-factor 2 --partitions 3
+/kafka/bin/kafka-topics.sh --zookeeper zookeeper:2181 --create --topic dtz-logging --replication-factor 1 --partitions 3
+
+### Delete topics
+/kafka/bin/zookeeper-shell.sh zookeeper:2181 ls /brokers/topics
+/kafka/bin/zookeeper-shell.sh zookeeper:2181 rmr /brokers/topics/topicname
 
 
 

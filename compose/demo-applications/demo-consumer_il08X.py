@@ -10,10 +10,10 @@ from confluent_kafka import Consumer, KafkaError
 # source own company name
 
 
-KAFKA_TOPIC_IN = "test"
+KAFKA_TOPIC_IN = "test-topic"
 
 conf = {'bootstrap.servers': 'il081:9093,il082:9094,il083:9095',
-        'group.id': 'mygroup',
+        'group.id': 'testgroup',
         'default.topic.config': {'auto.offset.reset': 'smallest'}}
 
 consumer = Consumer(**conf)
@@ -24,7 +24,9 @@ print("Starting to poll")
 running = True
 while running:
     msg = consumer.poll(10)  # in ms
-    if not msg.error():
+    if not msg:
+        continue
+    elif not msg.error():
         print('Received message: %s' % msg.value().decode('utf-8'))
     elif msg.error().code() != KafkaError._PARTITION_EOF:
         print(msg.error())

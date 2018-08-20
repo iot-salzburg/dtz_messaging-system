@@ -37,7 +37,7 @@ RETENTION_TIME = 6  # in months
 
 # Sensorthings parameters
 # ST_SERVER = "http://localhost:8084/v1.0/"  # reachable only from host outside docker
-ST_SERVER = "http://gost:8080/v1.0/"  # GOST server is reachable within kafka stack with that
+ST_SERVER = "http://gost:8084/v1.0/"  # GOST server is reachable within kafka stack with that
 # REFRESH_MAPPING_EVERY = 5 * 60  # in seconds
 
 if os.uname()[1] == 'iot86':
@@ -227,4 +227,4 @@ if __name__ == '__main__':
     restore_from_sensorthings = Process(target=reassemble_kafka_from_st, args=())
     restore_from_sensorthings.start()
 
-    app.run(host="0.0.0.0", debug=False, port=3033)
+    app.run(host="0.0.0.0", debug=False, port=3034)

@@ -15,6 +15,7 @@ docker node update --label-add kafka=83 il083
 
 ## kafka-medium:
 Finally works with changes (on same page as comment)
+cd messaging-system/compose/kafka-medium
 See the [tutorial](https://medium.com/@NegiPrateek/wtf-setting-up-kafka-cluster-using-docker-stack-5efc68841c23)
 
 sudo apt-get update

@@ -1,0 +1,30 @@
+Post Things:
+
+POST
+http://il081:8084/v1.0/Things
+
+{
+  "name": "Prusa i3",
+  "description": "3D Printer Prusa i3 MK3 in the Iot Lab Salzburg on the central desk",
+  "properties":  {
+    "kafka": {
+        "hosts": [
+            "il081:9093",
+            "il082:9094",
+            "il083:9095"
+        ],
+        "topics": {
+            "metrics": "dtz-sensorthings",
+            "logs": "dtz-logging"
+        }
+    },
+    "specification": "https://www.prusa3d.com/downloads/manual/prusa3d_manual_175_en.pdf"
+}
+}
+
+{
+  "name": "Panda",
+  "description": "Franka Emika Panda robot in the Iot Lab Salzburg on the central desk",
+  "properties":  {},
+   "specification": "https://s3-eu-central-1.amazonaws.com/franka-de-uploads-staging/uploads/2018/05/2018-05-datasheet-panda.pdf"
+}

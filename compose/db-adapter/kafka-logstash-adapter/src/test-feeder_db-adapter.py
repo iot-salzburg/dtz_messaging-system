@@ -17,7 +17,7 @@ import random
 from confluent_kafka import Consumer, KafkaError
 
 # logstash parameters
-HOST_default = 'iot86'  # 'il060'  # 'logstash'  # important to set
+HOST_default = 'il081'  # 'il060'  # 'logstash'  # important to set
 PORT_default = 5000
 STATUS_FILE = "status.log"
 
@@ -116,7 +116,7 @@ class KafkaStAdapter:
             data = {'Datastream': {'@iot.id': 0, 'name': 'testdata'},
                     'phenomenonTime': datetime.utcnow().replace(tzinfo=pytz.UTC).isoformat(),
                     'result': random.normalvariate(mu=0, sigma=1),
-                    'resultTime': '2018-02-07T08:40:51.273061+00:00'}
+                    'resultTime': '2018-07-07T08:40:51.273061+00:00'}
 
             print(json.dumps(data))
             logger_data.info('', extra=data)

@@ -10,14 +10,14 @@ from confluent_kafka import Consumer, KafkaError
 # source own company name
 
 
-KAFKA_TOPIC_IN = "test-topic"
+KAFKA_TOPIC = 'dtz.sensorthings'
 
-conf = {'bootstrap.servers': 'il081:9093,il082:9094,il083:9095',
+conf = {'bootstrap.servers': 'il081:9092,il082:9092,il083:9092',  # '192.168.48.81:9093,192.168.48.82:9094,192.168.48.83:9095',
         'group.id': 'testgroup',
         'default.topic.config': {'auto.offset.reset': 'smallest'}}
 
 consumer = Consumer(**conf)
-consumer.subscribe([KAFKA_TOPIC_IN])
+consumer.subscribe([KAFKA_TOPIC])
 
 print("Starting to poll")
 

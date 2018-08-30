@@ -28,8 +28,8 @@ to the logstash instance of the ELK stack."""
 
 # kafka parameters
 # topics and servers should be of the form: "topic1,topic2,..."
-KAFKA_TOPICS = "dtz-sensorthings"
-BOOTSTRAP_SERVERS_default = 'il081:9093,il082:9094,il083:9095'
+KAFKA_TOPICS = "dtz.SensorThings"
+BOOTSTRAP_SERVERS_default = '192.168.48.81:9092,il082:9092,il083:9092'
 
 # "iot86" for local testing. In case of any data losses, temporarily use another group-id until all data is load.
 KAFKA_GROUP_ID = "il081"  # use il060 if used in docker swarm
@@ -43,7 +43,7 @@ PORT_default = 5000
 STATUS_FILE = "status.log"
 
 # Sensorthings parameters
-ST_SERVER = "http://il060:8082/v1.0/"
+ST_SERVER = "http://il081:8084/v1.0/"
 REFRESH_MAPPING_EVERY = 5 * 60  # in seconds
 
 # webservice setup
@@ -104,7 +104,7 @@ class KafkaStAdapter:
         """
         # Init logstash logging
         logging.basicConfig(level='WARNING')
-        loggername_logs = 'db-adapter.logging'
+        loggername_logs = HOST_default + '.logging'
         logger_logs = logging.getLogger(loggername_logs)
         logger_logs.setLevel(logging.INFO)
         #  use default and init Logstash Handler
@@ -164,7 +164,7 @@ class KafkaStAdapter:
         adapter_status = {
             "application": "db-adapter",
             "doc": __desc__,
-            "status": "waiting for Logstash",
+            "status": "waiting for the datastack",
             "kafka input": {
                 "configuration": conf,
                 "subscribed topics": kafka_topics_str,
@@ -191,29 +191,35 @@ class KafkaStAdapter:
             f.write(json.dumps(adapter_status))
             logger_logs.info('Status of Adapter: {}'.format(adapter_status))
 
-        # time for logstash init
-        logstash_reachable = False
-        while not logstash_reachable:
-            try:
-                # use localhost if running local
-                r = requests.get("http://" + HOST_default + ":9600")
-                status_code = r.status_code
-                if status_code in [200]:
-                    logstash_reachable = True
-            except:
-                continue
-            finally:
-                time.sleep(0.25)
+        time.sleep(5)
+        # # time for logstash init
+        # logstash_reachable = False
+        # while not logstash_reachable:
+        #     try:
+        #         # use localhost if running local
+        #         r = requests.get("http://" + HOST_default + ":9600")
+        #         status_code = r.status_code
+        #         if status_code in [200]:
+        #             logstash_reachable = True
+        #     except:
+        #         continue
+        #     finally:
+        #         time.sleep(0.25)
 
         # ready to stream flag
-        adapter_status["status"] = "running"
+        adapter_status["status"] = "starting"
         with open(STATUS_FILE, "w") as f:
             f.write(json.dumps(adapter_status))
-        print("Adapter Status:", str(adapter_status))
         logger_logs.info('Logstash reachable')
 
         # Kafka 2 Logstash streaming
         if self.enable_kafka_adapter:
+            adapter_status["status"] = "running"
+            with open(STATUS_FILE, "w") as f:
+                f.write(json.dumps(adapter_status))
+            print("Adapter Status:", str(adapter_status))
+            logger_logs.info('Logstash reachable')
+            data = None
             running = True
             ts_refreshed_mapping = time.time()
             try:
@@ -236,15 +242,15 @@ class KafkaStAdapter:
                                 self.one_st_id_map(data_id)
                             data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
                             data['Datastream']['URI'] = ST_SERVER + "Datastreams(" + data_id + ")"
-
-                        # print(data["Datastream"]["@iot.id"], data["phenomenonTime"])
-                        msg = data.pop('message', None)
-                        msg = ['' if msg is None else msg][0]
-                        logger_metric.info(msg, extra=data)
+                            # print(data["Datastream"], data["phenomenonTime"])
+                        print(data)
+                        message = data.pop('message', None)
+                        message = ['' if message is None else message][0]
+                        logger_metric.info(message, extra=data)
 
                     elif msg.error().code() != KafkaError._PARTITION_EOF:
                         print(msg.error())
-                        logger_logs.error('Exception in Kafka-Logstash Streaming: {}'.format(msg))
+                        logger_logs.error('Exception in Kafka-Logstash Streaming: {}, {}'.format(msg.error(), msg.value()))
 
                     t = time.time()
                     if t - ts_refreshed_mapping > REFRESH_MAPPING_EVERY:
@@ -264,12 +270,13 @@ class KafkaStAdapter:
 if __name__ == '__main__':
     # Load variables set by docker-compose, enable kafka as data input and sensorthings mapping by default
     enable_kafka_adapter = True
-    if os.getenv('enable_kafka_adapter', "true") in ["false", "False", 0]:
-        enable_kafka_adapter = False
+    # if os.getenv('enable_kafka_adapter', "true") in ["false", "False", 0]:
+    #     enable_kafka_adapter = False
 
     enable_sensorthings = True
     if os.getenv('enable_sensorthings', "true") in ["false", "False", 0]:
-        enable_sensorthings = False
+        pass
+    enable_sensorthings = False
 
     # Create an kafka to logstash instance
     adapter_instance = KafkaStAdapter(enable_kafka_adapter, enable_sensorthings)

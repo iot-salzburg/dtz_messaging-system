@@ -13,7 +13,7 @@ from confluent_kafka import Consumer, KafkaError
 
 KAFKA_TOPIC_IN = "test3"
 
-conf = {'bootstrap.servers': 'localhost:9092',
+conf = {'bootstrap.servers': 'localhost:9093',
         'group.id': 'mygroup',
         'default.topic.config': {'auto.offset.reset': 'smallest'}}
 

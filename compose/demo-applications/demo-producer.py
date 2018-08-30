@@ -21,8 +21,9 @@ __status__ = "Development"
 
 
 KAFKA_TOPIC = 'test-topic'
+KAFKA_TOPIC = 'dtz.sensorthings'
 # The ports must be specified, as the default is 9092 for each one
-BOOTSTRAP_SERVERS = 'il081:9093,il082:9094,il083:9095'
+BOOTSTRAP_SERVERS = 'il081:9092,il082:9092,il083:9092'
 KAFKA_GROUP_ID = "test-app"
 
 # get bootstrap_servers from environment variable or use defaults and configure Consumer
@@ -35,7 +36,7 @@ startt = time.time()
 while True:
     msg = dict({"id": 0})
     msg["result"] = random.normalvariate(0, 1)
-    msg["phenomenonTime"] = datetime.datetime.now().replace(tzinfo=pytz.UTC).isoformat()
+    msg["phenomenonTime"] = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC).isoformat()
     dumped_msg = json.dumps(msg).encode('utf-8')
 
     try:

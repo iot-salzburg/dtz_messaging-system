@@ -2,7 +2,7 @@ import logging
 import logstash
 import sys
 
-host = 'localhost'
+host = 'il081'
 
 test_logger = logging.getLogger('python-logstash-logger')
 test_logger.setLevel(logging.INFO)

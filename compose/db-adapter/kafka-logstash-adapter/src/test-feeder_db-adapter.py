@@ -17,7 +17,7 @@ import random
 from confluent_kafka import Consumer, KafkaError
 
 # logstash parameters
-HOST_default = 'il081'  # 'il060'  # 'logstash'  # important to set
+HOST_default = 'il081'  # 'il081'  # 'logstash'  # important to set
 PORT_default = 5000
 STATUS_FILE = "status.log"
 
@@ -93,17 +93,17 @@ class KafkaStAdapter:
 
         # time for logstash init
         logstash_reachable = False
-        while not logstash_reachable:
-            try:
-                # use localhost if running local
-                r = requests.get("http://" + HOST_default + ":9600")
-                status_code = r.status_code
-                if status_code in [200]:
-                    logstash_reachable = True
-            except:
-                continue
-            finally:
-                time.sleep(0.25)
+        # while not logstash_reachable:
+        #     try:
+        #         # use localhost if running local
+        #         r = requests.get("http://" + HOST_default + ":9600")
+        #         status_code = r.status_code
+        #         if status_code in [200]:
+        #             logstash_reachable = True
+        #     except:
+        #         continue
+        #     finally:
+        #         time.sleep(0.25)
 
         # ready to stream flag
         adapter_status["status"] = "running"
@@ -123,7 +123,7 @@ class KafkaStAdapter:
             time.sleep(5.0)
 
             log = "This is a logfile"
-            print(log)
+            #print(log)
             logger_logs.info(log)
 
             time.sleep(5.0)

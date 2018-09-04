@@ -28,7 +28,7 @@ to the logstash instance of the ELK stack."""
 
 # kafka parameters
 # topics and servers should be of the form: "topic1,topic2,..."
-KAFKA_TOPICS = "dtz.SensorThings"
+KAFKA_TOPICS = "dtz.sensorthings"
 BOOTSTRAP_SERVERS_default = '192.168.48.81:9092,il082:9092,il083:9092'
 
 # "iot86" for local testing. In case of any data losses, temporarily use another group-id until all data is load.

@@ -34,7 +34,7 @@ p = Producer(**conf)
 startt = time.time()
 
 while True:
-    msg = dict({"id": 0})
+    msg = dict({"Datastream": {"id": 0}})
     msg["result"] = random.normalvariate(0, 1)
     msg["phenomenonTime"] = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC).isoformat()
     dumped_msg = json.dumps(msg).encode('utf-8')

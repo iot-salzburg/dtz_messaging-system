@@ -29,7 +29,7 @@ to the logstash instance of the ELK stack."""
 # kafka parameters
 # topics and servers should be of the form: "topic1,topic2,..."
 KAFKA_TOPICS = "dtz.sensorthings"
-BOOTSTRAP_SERVERS_default = '192.168.48.81:9092,il082:9092,il083:9092'
+BOOTSTRAP_SERVERS_default = '192.168.48.81:9092,192.168.48.82:9092,192.168.48.83:9092'
 
 # "iot86" for local testing. In case of any data losses, temporarily use another group-id until all data is load.
 KAFKA_GROUP_ID = "il081"  # use il060 if used in docker swarm
@@ -191,20 +191,19 @@ class KafkaStAdapter:
             f.write(json.dumps(adapter_status))
             logger_logs.info('Status of Adapter: {}'.format(adapter_status))
 
-        time.sleep(5)
-        # # time for logstash init
-        # logstash_reachable = False
-        # while not logstash_reachable:
-        #     try:
-        #         # use localhost if running local
-        #         r = requests.get("http://" + HOST_default + ":9600")
-        #         status_code = r.status_code
-        #         if status_code in [200]:
-        #             logstash_reachable = True
-        #     except:
-        #         continue
-        #     finally:
-        #         time.sleep(0.25)
+        # time for logstash init
+        logstash_reachable = False
+        while not logstash_reachable:
+            try:
+                # use localhost if running local
+                r = requests.get("http://" + HOST_default + ":9600")
+                status_code = r.status_code
+                if status_code in [200]:
+                    logstash_reachable = True
+            except:
+                continue
+            finally:
+                time.sleep(0.25)
 
         # ready to stream flag
         adapter_status["status"] = "starting"
@@ -243,7 +242,7 @@ class KafkaStAdapter:
                             data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
                             data['Datastream']['URI'] = ST_SERVER + "Datastreams(" + data_id + ")"
                             # print(data["Datastream"], data["phenomenonTime"])
-                        print(data)
+                        # print(data)
                         message = data.pop('message', None)
                         message = ['' if message is None else message][0]
                         logger_metric.info(message, extra=data)

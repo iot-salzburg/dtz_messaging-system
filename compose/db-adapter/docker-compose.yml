@@ -1,11 +1,11 @@
 version: '3.3'
 
 services:
-  kafka:
+  adapter:
     image: 127.0.0.1:5001/db-adapter
     build: kafka-logstash-adapter/
-    env_file:
-      - .env
+#    env_file:
+#      - .env
     ports:
       - "3030:3030"
     depends_on:
@@ -19,7 +19,7 @@ services:
         limits:
           cpus: "1"
           memory: 4G
-      replicas: 3
+      replicas: 2
       update_config:
         parallelism: 2
         delay: 10s

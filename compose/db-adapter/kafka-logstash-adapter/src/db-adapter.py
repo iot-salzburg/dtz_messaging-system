@@ -74,14 +74,18 @@ class KafkaStAdapter:
             self.id_mapping = self.full_st_id_map()
 
     def full_st_id_map(self):
-        datastreams = requests.get(ST_SERVER + "Datastreams").json()
         id_mapping = dict()
-        id_mapping["@iot.nextLink"] = datastreams.get("@iot.nextLink", None)
-        id_mapping["value"] = dict()
-        for stream in datastreams["value"]:
-            stream_id = str(stream["@iot.id"])
-            id_mapping["value"][stream_id] = {"name": stream["name"],
-                                              "description": stream["description"]}
+        try:
+            datastreams = requests.get(ST_SERVER + "Datastreams").json()
+
+            id_mapping["@iot.nextLink"] = datastreams.get("@iot.nextLink", None)
+            id_mapping["value"] = dict()
+            for stream in datastreams["value"]:
+                stream_id = str(stream["@iot.id"])
+                id_mapping["value"][stream_id] = {"name": stream["name"],
+                                                  "description": stream["description"]}
+        except Exception as e:
+            print("Exception in full_st_id_map: {}".format(e))
         return id_mapping
 
     def one_st_id_map(self, idn):
@@ -251,10 +255,10 @@ class KafkaStAdapter:
                         print(msg.error())
                         logger_logs.error('Exception in Kafka-Logstash Streaming: {}, {}'.format(msg.error(), msg.value()))
 
-                    t = time.time()
-                    if t - ts_refreshed_mapping > REFRESH_MAPPING_EVERY:
-                        self.id_mapping = self.empty_id_mapping()
-                        ts_refreshed_mapping = t
+                    # t = time.time()
+                    # if t - ts_refreshed_mapping > REFRESH_MAPPING_EVERY:
+                    #     self.id_mapping = self.empty_id_mapping()
+                    #     ts_refreshed_mapping = t
                     time.sleep(0.0)
 
             except Exception as error:

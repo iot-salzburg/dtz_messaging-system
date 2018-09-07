@@ -15,6 +15,8 @@ services:
       placement:
         constraints:
           - node.labels.zoo==81
+      restart_policy:
+        condition: always
     command: /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
 
   kafka1:
@@ -32,6 +34,9 @@ services:
       placement:
         constraints:
           - node.labels.kafka==81
+      restart_policy:
+        condition: always
+
     command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9093 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://192.168.48.81:9093 --override broker.id=1
 
 
@@ -51,6 +56,9 @@ services:
       placement:
         constraints:
           - node.labels.kafka==82
+      restart_policy:
+        condition: always
+
     command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9094 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://192.168.48.82:9094 --override broker.id=2
 
   kafka3:
@@ -68,6 +76,8 @@ services:
       placement:
         constraints:
           - node.labels.kafka==83
+      restart_policy:
+        condition: always
     command: /kafka/bin/kafka-server-start.sh /kafka/config/server.properties --override zookeeper.connect=zookeeper:2181 --override listeners=INT://:9092,EXT://0.0.0.0:9095 --override listener.security.protocol.map=INT:PLAINTEXT,EXT:PLAINTEXT --override inter.broker.listener.name=INT --override advertised.listeners=INT://:9092,EXT://192.168.48.83:9095 --override broker.id=3
 
 networks:

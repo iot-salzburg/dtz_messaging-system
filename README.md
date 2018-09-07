@@ -24,7 +24,7 @@ kafka-connect solution, which will guarantee 1to1 delivery.
 if implemented with a HTTP Proxy and the avro messaging format.
 
 * avro_producer: here some scripts use the avro messaging format in
-kafka. Currently we don't use them.
+kafka. Currently we don't use this format.
 
 
 ## Contents

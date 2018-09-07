@@ -18,8 +18,8 @@ from confluent_kafka import Consumer, KafkaError
 # ID mapping is pretty much straightforward with a python script
 
 
-__date__ = "20 August 2018"
-__version__ = "1.11"
+__date__ = "05 September 2018"
+__version__ = "1.12"
 __email__ = "christoph.schranz@salzburgresearch.at"
 __status__ = "Development"
 __desc__ = """This program forwards consumed messages from the kafka bus semantically interpreted by sensorthings 

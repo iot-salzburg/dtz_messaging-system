@@ -82,21 +82,27 @@ after every restart from scratch. This is in docker swarm very complex.
 In step 6, use rename the config to 'il08k.properties' and change the
 following lines:
 
-broker.id=k
-delete.topic.enable=true
-log.dirs=/tmp/kafka-logs-k
-zookeeper.connect=il081:2181
+broker.id=[k]
 
+delete.topic.enable=true
+
+log.dirs=/tmp/kafka-logs-[k]
+
+zookeeper.connect=il08[1]:2181
+
+```bash
 /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
+
 /kafka/bin/kafka-server-start.sh /kafka/config/il081.properties
+```
 
 Start on the il081 zookeeper and on all nodes kafka with the proper server config
  into the autostart script `~/.bashrc`:
-
+```
 /kafka/bin/zookeeper-server-start.sh -daemon /kafka/config/zookeeper.properties
 
 /kafka/bin/kafka-server-start.sh -daemon /kafka/config/il08[k].properties
-
+```
 
 ### Test the system
 /kafka/bin/kafka-topics.sh --zookeeper il081:2181 --list

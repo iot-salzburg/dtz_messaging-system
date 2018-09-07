@@ -1,27 +1,39 @@
-# Data Channel Service for Streaming Data within or accross companies on nimble
+# Panta Rhei: Kafka based Messaging System with SensorThings semantics
 
-Based on a specified contract negotiated between two
-registered companies on nimble, we support data streaming
-of machine data.
+This repository includes multiple implementations focusing on the
+messaging bus. This includes:
 
-The DataChannel Service is composed from the following components:
-* [Kafka Stack](https://kafka.apache.org/) version **4.0.0** (based on Kafka 0.11) with following subcomponents:
-    * Kafka Brokers
-    * Kafka Streams
-    * Kafka Rest API
-    * Custum Kafka-Topic Management service
+* **sensorthings**: The involves a `docker-compose.yaml` which sets up
+the sensorthings GOST server. The POST of instances belongs to
+data producer adapter.
 
-* SensorThings Server [GOST](https://github.com/gost/server) for semantic description
+* **db-adapter**: The database adapter subscribes to all active topics
 
 
+* fast-data-dev: a docker-compose that sets up an advanced kafka stack
+for testing. Unfortunately, this solution is not scalable.
+
+* kafka-medium: this sets up a scalable kafka stack via docker swarms.
+However, when re-deploying, the docker images has to be pruned in
+advanced. This is not suitable for our demands.
+
+* connect: it is planned to move from the db-adapter to an integrated
+kafka-connect solution, which will guarantee 1to1 delivery.
+
+* Rest-API: Multiple rest APIs are stored here which could be useful
+if implemented with a HTTP Proxy and the avro messaging format.
+
+* avro_producer: here some scripts use the avro messaging format in
+kafka. Currently we don't use them.
 
 
 ## Contents
 
 1. [Requirements](#requirements)
-2. [Usage](#usage)
-3. [Backlog](Backlog)
-3. [Trouble-Shooting](#Trouble-shooting)
+2. [Apache Kafka Setup](#apache-kafka-setup)
+3. [Sensorthings Server](#sensorthings-server)
+4. [DB-Adapter](#db-adapter)
+5. [Trouble-Shooting](#trouble-shooting)
 
 
 ## Requirements
@@ -31,13 +43,92 @@ The DataChannel Service is composed from the following components:
 3. Clone this repository
 
 
-## Usage
 
-Using `docker-compose`:
+## Apache Kafka Setup
+
+The easiest way found to set up a kafka stack, is without the use of
+docker, but instead install it directly via cli.
+
+For each node:
+
+```
+sudo apt-get update && apt-get install openjdk-8-jre wget -y
+set kafka_version=0.11.0.3
+wget https://archive.apache.org/dist/kafka/${kafka_version}/kafka_2.11-${kafka_version}.tgz
+tar -xvzf kafka_2.11-${kafka_version}.tgz
+rm kafka_2.11-${kafka_version}.tgz
+sudo mv kafka_2.11-${kafka_version} /kafka
+sudo chmod +x /kafka/bin/*
+cd /kafka
+```
+Then make a config file  for each broker on  node [k] :
+
+```
+cp config/server.properties config/il08[k].properties
+```
+
+And set for each the following properties:
+
+```
+broker.id=[k]
+delete.topic.enable=true
+log.dirs=/tmp/kafka-logs-[k]
+zookeeper.connect=il081:2181
+```
+
+Note that zookeeper will run solely on node il081.
+### Starting Kafka
+
+Run zookeeper only on node il081, and kafka on each node [k].
+The `-daemon` flag runs the process in background.
+```
+user@il081:~$ /kafka/bin/zookeeper-server-start.sh -daemon /kafka/config/zookeeper.properties
+user@il081:~$ /kafka/bin/kafka-server-start.sh -daemon /kafka/config/il08[1].properties
+user@il082:~$ /kafka/bin/kafka-server-start.sh -daemon /kafka/config/il08[2].properties
+user@il083:~$ /kafka/bin/kafka-server-start.sh -daemon /kafka/config/il08[3].properties
+```
+
+### Testing
+This is possible on any node.
+
+```
+/kafka/bin/kafka-topics.sh --zookeeper il081:2181 --list
+/kafka/bin/kafka-topics.sh --zookeeper il081:2181 --create --topic test-topic --replication-factor 2 --partitions 3
+/kafka/bin/kafka-topics.sh --zookeeper il081:2181 --describe --topic test-topic
+/kafka/bin/kafka-console-producer.sh --broker-list il081:9092,il082:9092,il083:9092 --topic test-topic
+/kafka/bin/kafka-console-consumer.sh --bootstrap-server il081:9092,il082:9092,il083:9092 --topic test-topic --from-beginning
+```
+
+Here we should see that data written from the producer will appear
+to the consumer. It makes sense to use multiple terminals and nodes.
+
+
+### Create our topics
+
+The data should be persistent for at least 6 weeks
+and cleaned up compactly.
+```
+/kafka/bin/kafka-topics.sh --zookeeper il081:2181 --create --topic dtz.sensorthings --replication-factor 2 --partitions 3 --config cleanup.policy=compact --config retention.ms=3628800000 --config retention.bytes=-1
+/kafka/bin/kafka-topics.sh --zookeeper il081:2181 --create --topic dtz.logging --replication-factor 1 --partitions 3 --config cleanup.policy=compact --config retention.ms=3628800000 --config retention.bytes=-1
+```
+
+### Delete topics
+```
+/kafka/bin/zookeeper-shell.sh il081:2181 ls /brokers/topics
+/kafka/bin/zookeeper-shell.sh il081:2181 rmr /brokers/topics/topicname
+```
+
+
+
+
+
+## Sensorthings Server
+
+Using `docker`:
 
 ```bash
-cd compose
-sudo docker-compose up --build -d
+cd compose/sensorthings
+./start-sensorthings.sh
 ```
 
 The flag `-d` stands for running it in background (detached mode):
@@ -45,44 +136,27 @@ The flag `-d` stands for running it in background (detached mode):
 Watch the logs with:
 
 ```bash
-sudo docker-compose logs -f
+docker service logs -f st
 ```
 
 
-As soon as the instances are up, the `dc-service` synchronizes the kafka topics
-from the SensorThings instance. During this initialisation phase, the `dc-service`
-prevents kafka from any operations that would lead to an error. After restoring
-contracts stored in SensorThings new contracts can be submitted and
-the output would look like following:
 
-```
-Trying to restore kafka topics from SensorThings
-kafka-cluster_1  | Created topic "eu.channelID_1.companyID_ownername".
-kafka-cluster_1  | Created topic "eu.channelID_2.companyID_ownername".
-...
-kafka-cluster_1  | Created topic "eu.channelID_N.companyID_Salzburg-Research".
-kafka-cluster_1  | dc-service successfully restored all kafka topics from Sensorthings
+## DB-Adapter
+Using `docker`:
+
+```bash
+cd compose/db-adapter
+./start-adapter.sh
 ```
 
 
-All outputs and commands below are examples of how the `dc-service` can
-be used.
-
-### Kafka-Services:
-
-List topic names:
-```
-http://hostname:8082/topics
-```
 
 
-Get kafka-stack status:
-```
-http://hostname:3033
-```
+## Fast-data-dev services:
+These services are obsolete by the current state of implementation.
 
+### Producer services
 
-### Producer services:
 Submit a contract to create a new channel
 ```
 http://hostname:3033/submit_contract
@@ -202,13 +276,13 @@ http://hostname:8082/consumers/my-consumer-group/instances/my_consumer_json/reco
 ```
 
 
-## Backlog
 
 
 
 ## Trouble-Shooting
 
-* ERROR org.apache.kafka.common.errors.TopicExistsException: Topic 'eu.channelID_10.companyID_Salzburg-Research' already exists.
+* ERROR org.apache.kafka.common.errors.TopicExistsException:
+Topic 'topic-name' already exists.
 If data is sent before kafka topics are restored, an error will be returned.
 
 * ERROR in all gost applications: "invalid data found"

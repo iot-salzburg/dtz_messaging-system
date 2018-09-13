@@ -32,7 +32,7 @@ KAFKA_TOPICS = "dtz.sensorthings"
 BOOTSTRAP_SERVERS_default = '192.168.48.81:9092,192.168.48.82:9092,192.168.48.83:9092'
 
 # "iot86" for local testing. In case of any data losses, temporarily use another group-id until all data is load.
-KAFKA_GROUP_ID = "il081"  # use il060 if used in docker swarm
+KAFKA_GROUP_ID = "192.168.48.81"  # use il060 if used in docker swarm
 # If executed locally with python, the KAFKA_GROUP_ID won't be changed
 #KAFKA_GROUP_ID = os.getenv('KAFKA_GROUP_ID', KAFKA_GROUP_ID)  # overwrite iot86 by envfile ID=il060
 # if deployed in docker, the adapter will automatically use the entry in the .env file.

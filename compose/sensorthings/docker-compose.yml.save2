@@ -3,13 +3,10 @@ version: "3.4"
 services:
 
   gost-db:
-#    image: 127.0.0.1:5001/gost-db
     image: geodan/gost-db
-#    build: gost-db/
     restart: always
     volumes:
-#        - /mnt/il060-samba-share/il08X/sensorthings/gost-db:/var/lib/postgresql/data
-      - postgis:/var/lib/postgresql/data
+        - postgis:/var/lib/postgresql/data
     environment:
         POSTGRES_DB: gost
         POSTGRES_USER: postgres
@@ -18,8 +15,7 @@ services:
       - datachannel
     deploy:
       placement:
-        constraints:
-          - node.labels.kafka==82
+        constraints: [node.role == worker]
       resources:
         limits:
           cpus: "1"
@@ -49,8 +45,7 @@ services:
       - datachannel
     deploy:
       placement:
-        constraints:
-          - node.labels.kafka==82
+        constraints: [node.role == worker]
       resources:
         limits:
           cpus: "1"
@@ -74,8 +69,7 @@ services:
       - datachannel
     deploy:
       placement:
-        constraints: 
-          - node.labels.kafka==82
+        constraints: [node.role == worker]
       resources:
         limits:
           cpus: "1"

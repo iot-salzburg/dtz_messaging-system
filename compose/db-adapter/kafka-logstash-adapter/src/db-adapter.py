@@ -78,6 +78,8 @@ class KafkaStAdapter:
         id_mapping = dict()
         id_mapping["@iot.nextLink"] = datastreams.get("@iot.nextLink", None)
         id_mapping["value"] = dict()
+        if "value" not in datastreams.keys():
+            return  # Skip if page is not found
         for stream in datastreams["value"]:
             stream_id = str(stream["@iot.id"])
             id_mapping["value"][stream_id] = {"name": stream["name"],
@@ -90,6 +92,8 @@ class KafkaStAdapter:
     def one_st_id_map(self, idn):
         stream = requests.get(ST_SERVER + "Datastreams(" + str(idn) + ")?$expand=Thing,Sensor").json()
         stream_id = str(stream["@iot.id"])
+        if "value" not in stream.keys():
+            return  # Skip if page is not found
         self.id_mapping["value"][stream_id] = {"name": stream["name"],
                                                "description": stream["description"],
                                                "URI": stream["@iot.selfLink"],
@@ -223,53 +227,53 @@ class KafkaStAdapter:
         data = None
         running = True
         ts_refreshed_mapping = time.time()
-
+        # try:
         while running:
-            try:
-                msg = consumer.poll(0.1)
-                if msg is None:
+            msg = consumer.poll(0.1)
+            if msg is None:
+                continue
+            if not msg.error():
+                try:
+                    data = json.loads(msg.value().decode('utf-8'))
+                except json.decoder.JSONDecodeError:
+                    logger_metric.warning("could not decode msg: {}".format(msg.value()))
                     continue
-                if not msg.error():
+
+                if self.enable_sensorthings:
                     try:
-                        data = json.loads(msg.value().decode('utf-8'))
-                    except json.decoder.JSONDecodeError:
-                        logger_metric.warning("could not decode msg: {}".format(msg.value()))
+                        data_id = str(data['Datastream']['@iot.id'])
+                    except KeyError:
                         continue
-                    if self.enable_sensorthings:
-                        try:
-                            data_id = str(data['Datastream']['@iot.id'])
-                        except KeyError:
-                            continue
-                        if data_id not in list(self.id_mapping['value'].keys()):
-                            self.one_st_id_map(data_id)
-                        data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
-                        data['Datastream']['URI'] = self.id_mapping['value'][data_id]['URI']
-                        data['Datastream']['thing'] = self.id_mapping['value'][data_id]['thing']
-                        data['Datastream']['sensor'] = self.id_mapping['value'][data_id]['sensor']
+                    if data_id not in list(self.id_mapping['value'].keys()):
+                        self.one_st_id_map(data_id)
+                    data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
+                    data['Datastream']['URI'] = self.id_mapping['value'][data_id]['URI']
+                    data['Datastream']['thing'] = self.id_mapping['value'][data_id]['thing']
+                    data['Datastream']['sensor'] = self.id_mapping['value'][data_id]['sensor']
 
-                    # print(data)
-                    message = data.pop('message', None)
-                    message = ['' if message is None else message][0]
-                    # print(message, data)
-                    logger_metric.info(message, extra=data)
+                # print(data)
+                message = data.pop('message', None)
+                message = ['' if message is None else message][0]
+                # print(message, data)
+                logger_metric.info(message, extra=data)
 
-                elif msg.error().code() != KafkaError._PARTITION_EOF:
-                    print(msg.error())
-                    logger_logs.error('Exception in Kafka-Logstash Streaming: {}, {}'.format(msg.error(), msg.value()))
+            elif msg.error().code() != KafkaError._PARTITION_EOF:
+                print(msg.error())
+                logger_logs.error('Exception in Kafka-Logstash Streaming: {}, {}'.format(msg.error(), msg.value()))
 
-                t = time.time()
-                if t - ts_refreshed_mapping > REFRESH_MAPPING_EVERY:
-                    self.id_mapping = self.empty_id_mapping()
-                    ts_refreshed_mapping = t
-                time.sleep(0.0)
+            t = time.time()
+            if t - ts_refreshed_mapping > REFRESH_MAPPING_EVERY:
+                self.id_mapping = self.empty_id_mapping()
+                ts_refreshed_mapping = t
+            time.sleep(0.0)
 
-            except Exception as error:
-                logger_logs.error("Error in Kafka-Logstash Streaming: {}".format(error))
-                adapter_status["status"] = "Last error occured at {}: Error msg: {}, Data: {}"\
-                    .format(time.ctime(), str(error), data)
-                logger_logs.warning('Status of Adapter: {}'.format(adapter_status))
-                with open(STATUS_FILE, "w") as f:
-                    f.write(json.dumps(adapter_status))
+        # except Exception as error:
+        #     logger_logs.error("Error in Kafka-Logstash Streaming: {}".format(error))
+        #     adapter_status["status"] = "Last error occured at {}: Error msg: {}, Data: {}"\
+        #         .format(time.ctime(), str(error), data)
+        #     logger_logs.warning('Status of Adapter: {}'.format(adapter_status))
+        #     with open(STATUS_FILE, "w") as f:
+        #         f.write(json.dumps(adapter_status))
 
 
 if __name__ == '__main__':

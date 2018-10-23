@@ -242,14 +242,14 @@ class KafkaStAdapter:
                 if self.enable_sensorthings:
                     try:
                         data_id = str(data['Datastream']['@iot.id'])
-                    except KeyError:
-                        continue
-                    if data_id not in list(self.id_mapping['value'].keys()):
-                        self.one_st_id_map(data_id)
-                    data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
-                    data['Datastream']['URI'] = self.id_mapping['value'][data_id]['URI']
-                    data['Datastream']['thing'] = self.id_mapping['value'][data_id]['thing']
-                    data['Datastream']['sensor'] = self.id_mapping['value'][data_id]['sensor']
+                        if data_id not in list(self.id_mapping['value'].keys()):
+                            self.one_st_id_map(data_id)
+                        data['Datastream']['name'] = self.id_mapping['value'][data_id]['name']
+                        data['Datastream']['URI'] = self.id_mapping['value'][data_id]['URI']
+                        data['Datastream']['thing'] = self.id_mapping['value'][data_id]['thing']
+                        data['Datastream']['sensor'] = self.id_mapping['value'][data_id]['sensor']
+                    except TypeError:
+                        data['Datastream']['name'] =  str(data['Datastream'])
 
                 # print(data)
                 message = data.pop('message', None)

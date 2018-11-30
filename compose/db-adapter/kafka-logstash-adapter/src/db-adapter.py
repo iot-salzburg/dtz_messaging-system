@@ -43,7 +43,7 @@ PORT_default = 5000
 STATUS_FILE = "status.log"
 
 # Sensorthings parameters
-ST_SERVER = "http://192.168.48.81:8082/v1.0/"
+ST_SERVER = "http://192.168.48.82:8084/v1.0/"
 REFRESH_MAPPING_EVERY = 5 * 60  # in seconds
 
 # webservice setup

@@ -3,19 +3,15 @@ version: "3.4"
 services:
 
   gost-db:
-#    image: 127.0.0.1:5001/gost-db
     image: geodan/gost-db
-#    build: gost-db/
     restart: always
     volumes:
-#        - /mnt/il060-samba-share/il08X/sensorthings/gost-db:/var/lib/postgresql/data
+#      - /mnt/glusterfs/testvol:/data
       - postgis:/var/lib/postgresql/data
     environment:
         POSTGRES_DB: gost
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-    networks:
-      - datachannel
     deploy:
       placement:
         constraints:
@@ -45,8 +41,6 @@ services:
         GOST_SERVER_EXTERNAL_URI: http://il081:8084
         GOST_SERVER_MAX_ENTITIES: 200
         # GOST_MQTT_HOST: mosquitto
-    networks:
-      - datachannel
     deploy:
       placement:
         constraints:
@@ -70,8 +64,6 @@ services:
       - 8084:8080
     depends_on:
       - gost
-    networks:
-      - datachannel
     deploy:
       placement:
         constraints: 
@@ -96,6 +88,3 @@ volumes:
   mosquitto_data: {}
   mosquitto_conf: {}
 
-
-networks:
-  datachannel:

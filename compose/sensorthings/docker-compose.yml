@@ -4,9 +4,11 @@ services:
 
   gost-db:
     image: geodan/gost-db
+#    image: 127.0.0.1:5001/gost-db
+#    build: gost-db/
     restart: always
     volumes:
-#      - /mnt/glusterfs/testvol:/data
+#      - /mnt/glusterfs/gost-db/data:/data
       - postgis:/var/lib/postgresql/data
     environment:
         POSTGRES_DB: gost

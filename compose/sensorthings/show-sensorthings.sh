@@ -2,5 +2,5 @@
 echo "Printing 'docker service ls | grep st_':"
 docker service ls | grep st_
 echo ""
-echo "Printing 'docker stack ps st_gost-db':"
-docker stack ps st_gost-db
+echo "Printing 'docker service ps st_gost-db':"
+docker service ps st_gost-db

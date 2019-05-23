@@ -1,3 +1,5 @@
+**This version is deprecated** Please check https://github.com/iot-salzburg/dtz_datastack and https://github.com/iot-salzburg/panta_rhei.
+
 # Panta Rhei: Kafka based Messaging System with SensorThings semantics
 
 This repository includes multiple implementations focusing on the
